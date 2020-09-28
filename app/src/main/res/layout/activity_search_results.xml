@@ -29,7 +29,8 @@
         android:background="@drawable/searchview_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarSearchView" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarSearchView"
+        android:autofillHints="" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recview_search"
