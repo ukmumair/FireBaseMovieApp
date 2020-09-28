@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "110625653803",
+    "firebase_url": "https://fir-movieapp-e5dd4.firebaseio.com",
+    "project_id": "fir-movieapp-e5dd4",
+    "storage_bucket": "fir-movieapp-e5dd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110625653803:android:542d32859b32883c7c566e",
+        "android_client_info": {
+          "package_name": "com.umair.firebasemovieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110625653803-pr8gcogaa0u4ojaid5dtvllh3a3q70q9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umair.firebasemovieapp",
+            "certificate_hash": "e9034a95e7077151bda1a8ff39d18400c8cb19a2"
+          }
+        },
+        {
+          "client_id": "110625653803-tt352fgpkn5q88iu6e3t1fav4b144fmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn83wGIVFiT6YRyia60Sv_ppT_H9dodEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110625653803-tt352fgpkn5q88iu6e3t1fav4b144fmg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110625653803:android:af11e0942e6b07707c566e",
+        "android_client_info": {
+          "package_name": "com.umair.moviesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110625653803-er3pp1odr3dj6h6plqmipeu2mnicjgco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umair.moviesapp",
+            "certificate_hash": "e9034a95e7077151bda1a8ff39d18400c8cb19a2"
+          }
+        },
+        {
+          "client_id": "110625653803-tt352fgpkn5q88iu6e3t1fav4b144fmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn83wGIVFiT6YRyia60Sv_ppT_H9dodEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110625653803-tt352fgpkn5q88iu6e3t1fav4b144fmg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110625653803:android:83957a002c5cdacc7c566e",
+        "android_client_info": {
+          "package_name": "com.umair.moviesappadminpanel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110625653803-75d74undqudqa0kb0maj6ap6hemeeguu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umair.moviesappadminpanel",
+            "certificate_hash": "e9034a95e7077151bda1a8ff39d18400c8cb19a2"
+          }
+        },
+        {
+          "client_id": "110625653803-tt352fgpkn5q88iu6e3t1fav4b144fmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn83wGIVFiT6YRyia60Sv_ppT_H9dodEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110625653803-tt352fgpkn5q88iu6e3t1fav4b144fmg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

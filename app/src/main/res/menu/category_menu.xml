@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/anime"
+        android:id="@+id/cat_anime"/>
+    <item android:title="@string/bollywood"
+        android:id="@+id/cat_bollywood" />
+    <item android:id="@+id/cat_hollywood"
+        android:title="@string/hollywood"/>
+    <item android:id="@+id/search_movie"
+        android:title="@string/search_title"/>
+</menu>

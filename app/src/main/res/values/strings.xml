@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FreeMoviesApp</string>
+    <string name="anime">Anime</string>
+    <string name="bollywood">Bollywood</string>
+    <string name="hollywood">Hollywood </string>
+    <string name="action">Action</string>
+    <string name="adventure">Adventure</string>
+    <string name="thriller">Thriller</string>
+    <string name="comedy">Comedy</string>
+    <string name="thumbnail_image_desc">thumbnail_image</string>
+    <string name="search_view_title">Search movie</string>
+    <string name="content_description_search">search_view</string>
+    <string name="search_title">Search</string>
+    <string name="searchbarhint">Enter Movie name</string>
+</resources>
