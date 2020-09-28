@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             for (String s : children) {
                 if (!s.equals("lib")) {
                     deleteDir(new File(appDir, s));
-                    Log.i("EEEEEERRRRRRROOOOOOORRRR", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+                    Log.i("ERROR", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
                 }
             }
         }
