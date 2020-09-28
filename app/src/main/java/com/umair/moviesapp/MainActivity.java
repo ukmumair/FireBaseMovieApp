@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("ORDERBY","movie_type");
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
                         }
                 }
                 else
