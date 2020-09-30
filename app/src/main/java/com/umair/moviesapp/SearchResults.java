@@ -109,7 +109,7 @@ public class SearchResults extends AppCompatActivity {
                     {
                         Toast.makeText(SearchResults.this, "Movie not found", Toast.LENGTH_SHORT).show();
                     }
-                    searchAdapter = new SearchAdapter(getApplicationContext(),list);
+                    searchAdapter = new SearchAdapter(SearchResults.this,list);
                     recyclerView.setAdapter(searchAdapter);
                 }
             }
