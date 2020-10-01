@@ -6,26 +6,27 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_width="122dp"
+        android:layout_height="200dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="90dp"
+        app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:elevation="90dp"
-        android:background="@color/colorPrimaryDark">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/thumbnail_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="122dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/thumbnail_image_desc"
             android:scaleType="centerCrop"
-            tools:srcCompat="@drawable/ic_launcher_background"
-            android:contentDescription="@string/thumbnail_image_desc" />
+            tools:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/title_tv"
@@ -36,7 +37,7 @@
             android:padding="8dp"
             android:text="TextView"
             android:textColor="#fff"
-            android:textSize="20dp" />
+            android:textSize="12sp" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

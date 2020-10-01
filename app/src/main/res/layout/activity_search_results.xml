@@ -19,18 +19,21 @@
     <EditText
         android:id="@+id/search_editText"
         android:layout_width="0dp"
-        android:inputType="textCapSentences"
         android:layout_height="45dp"
-        android:textSize="20sp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints=""
+        android:background="@drawable/custom_buttons"
+        android:drawableEnd="@drawable/ic_search"
         android:hint="@string/searchbarhint"
-        android:background="@drawable/searchview_background"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textCapSentences"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarSearchView"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarSearchView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recview_search"

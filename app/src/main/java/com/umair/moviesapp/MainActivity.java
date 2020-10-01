@@ -3,10 +3,14 @@ package com.umair.moviesapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +29,15 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +45,14 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     MoviesAdapter adapter;
     MaterialToolbar toolbar;
+    SearchAdapter searchAdapter;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    List<MoviesModel> list;
     InterstitialAd mInterstitialAd;
+    FirebaseDatabase db;
+    DatabaseReference moviesRef;
+    MoviesModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navView);
         toolbar = findViewById(R.id.ToolBar);
         progressBar = findViewById(R.id.pbar);
+        list = new ArrayList<>();
+        db = FirebaseDatabase.getInstance();
+        moviesRef = db.getReference("Movies");
         progressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
         AdView adView = new AdView(this);
@@ -98,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         recyclerView = findViewById(R.id.recView);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,RecyclerView.VERTICAL,false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3,RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(gridLayoutManager);
         FirebaseRecyclerOptions<MoviesModel> options =
                 new FirebaseRecyclerOptions.Builder<MoviesModel>()
@@ -108,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
-
     @Override
     protected void onStart() {
         super.onStart();

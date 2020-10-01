@@ -45,7 +45,7 @@ public class SearchResults extends AppCompatActivity {
         moviesRef = firebaseDatabase.getReference("Movies");
         recyclerView = findViewById(R.id.recview_search);
         editText = findViewById(R.id.search_editText);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         searchAdapter = new SearchAdapter(this,list);
         recyclerView.setAdapter(searchAdapter);
@@ -89,7 +89,7 @@ public class SearchResults extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!toString.isEmpty())
                 {
-                    Boolean Found = false;
+                    boolean Found = false;
                     for (DataSnapshot ds : snapshot.getChildren())
                     {
                         String title = ds.child("title").getValue(String.class);

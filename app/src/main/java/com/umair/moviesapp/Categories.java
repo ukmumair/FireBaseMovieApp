@@ -55,7 +55,7 @@ public class Categories extends AppCompatActivity {
             }
         });
         recyclerViewCategory = findViewById(R.id.recCategory);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(Categories.this,2,RecyclerView.VERTICAL,false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(Categories.this,3,RecyclerView.VERTICAL,false);
         recyclerViewCategory.setLayoutManager(gridLayoutManager);
         FirebaseRecyclerOptions<MoviesModel> options =
                 new FirebaseRecyclerOptions.Builder<MoviesModel>()
