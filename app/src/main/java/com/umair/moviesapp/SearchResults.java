@@ -98,6 +98,7 @@ public class SearchResults extends AppCompatActivity {
                         String movie_genre = ds.child("movie_genre").getValue(String.class);
                         String url = ds.child("url").getValue(String.class);
                         String download_url = ds.child("download_url").getValue(String.class);
+                        assert title != null;
                         if (title.toLowerCase().contains(toString.toLowerCase()))
                         {
                             model = new MoviesModel(thumbnail,title,url,movie_type,movie_genre,download_url);
