@@ -16,13 +16,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -38,14 +31,12 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     MoviesAdapter adapter;
     MaterialToolbar toolbar;
-    SearchAdapter searchAdapter;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     List<MoviesModel> list;
-    InterstitialAd mInterstitialAd;
+//    InterstitialAd mInterstitialAd;
     FirebaseDatabase db;
     DatabaseReference moviesRef;
-    MoviesModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,22 +50,22 @@ public class MainActivity extends AppCompatActivity {
         moviesRef = db.getReference("Movies");
         progressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-5059492081286261/7865039855");
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        AdView mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        MobileAds.initialize(MainActivity.this,
-                "ca-app-pub-5059492081286261~7648567378");
-        mInterstitialAd = new InterstitialAd(MainActivity.this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-5059492081286261/2257489956");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//        AdView adView = new AdView(this);
+//        adView.setAdSize(AdSize.BANNER);
+//        adView.setAdUnitId("ca-app-pub-5059492081286261/7865039855");
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
+//        AdView mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+//        MobileAds.initialize(MainActivity.this,
+//                "ca-app-pub-5059492081286261~7648567378");
+//        mInterstitialAd = new InterstitialAd(MainActivity.this);
+//        mInterstitialAd.setAdUnitId("ca-app-pub-5059492081286261/2257489956");
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,17 +78,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 if (item.getTitle()==item.getTitle() && !item.getTitle().equals("Search"))
                 {
-                    if (mInterstitialAd.isLoaded()) {
-                            mInterstitialAd.show();
-                        }
-                    else {
+//                    if (mInterstitialAd.isLoaded()) {
+//                            mInterstitialAd.show();
+//                        }
+//                    else {
                         String category = item.getTitle().toString();
                         intent = new Intent(MainActivity.this,Categories.class);
                         intent.putExtra("CATEGORY",category);
                         intent.putExtra("ORDERBY","movie_type");
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        }
+//                        }
                 }
                 else
                 {
