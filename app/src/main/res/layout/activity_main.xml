@@ -73,7 +73,6 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/custom_buttons"
-                android:fontFamily="@font/roboto_medium_numbers"
                 android:gravity="center"
                 android:text="@string/bottom_banner_text"
                 android:textColor="@android:color/white"

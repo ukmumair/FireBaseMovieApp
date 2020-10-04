@@ -15,6 +15,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    private InterstitialAd interstitialAd;
     List<MoviesModel> list;
 //    InterstitialAd mInterstitialAd;
     FirebaseDatabase db;
@@ -66,6 +72,38 @@ public class MainActivity extends AppCompatActivity {
 //        mInterstitialAd = new InterstitialAd(MainActivity.this);
 //        mInterstitialAd.setAdUnitId("ca-app-pub-5059492081286261/2257489956");
 //        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        AudienceNetworkAds.initialize(this);
+        interstitialAd = new InterstitialAd(this, "799169794203817_799180570869406");
+        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+            }
+        };
+        interstitialAd.loadAd(
+                interstitialAd.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener)
+                        .build());
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +154,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
         super.onDestroy();
         adapter.stopListening();
         clearApplicationData();
