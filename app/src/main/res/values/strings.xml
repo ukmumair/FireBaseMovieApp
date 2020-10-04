@@ -14,4 +14,6 @@
     <string name="searchbarhint">Enter Movie name</string>
     <string name="search_hint">Enter Movie Name</string>
     <string name="bottom_banner_text">WIPLAY Unlimited Entertainment</string>
+    <string name="update_available">Update Available</string>
+    <string name="wilogo">WILOGO</string>
 </resources>

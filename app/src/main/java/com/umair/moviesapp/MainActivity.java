@@ -1,7 +1,11 @@
 package com.umair.moviesapp;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -18,8 +23,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     List<MoviesModel> list;
 //    InterstitialAd mInterstitialAd;
+    DatabaseReference version;
     FirebaseDatabase db;
     DatabaseReference moviesRef;
     @Override
@@ -109,6 +118,24 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MoviesAdapter(options,this,progressBar);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        version = db.getReference("App Version");
+        version.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String ver = Objects.requireNonNull(snapshot.child("latest").getValue()).toString();
+                final String dlink = Objects.requireNonNull(snapshot.child("dlink").getValue()).toString();
+                if (!getVersionInfo().equals(ver))
+                {
+                    ShowDialog(dlink,ver);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
     @Override
     protected void onStart() {
@@ -152,5 +179,59 @@ public class MainActivity extends AppCompatActivity {
 
         assert dir != null;
         return dir.delete();
+    }
+    public void ShowDialog(final String download_url, String version)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                .setCancelable(false)
+                .setMessage("Version " +version + " Update Available \nYou Need To Update The App In Order To Use.")
+                .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(download_url));
+                        startActivity(browserIntent);
+                    }
+                }).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    public String getVersionInfo()
+    {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(),0);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+
+        }
+        assert packageInfo != null;
+        return packageInfo.versionName;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        version.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String ver = Objects.requireNonNull(snapshot.child("latest").getValue()).toString();
+                final String dlink = Objects.requireNonNull(snapshot.child("dlink").getValue()).toString();
+                if (!getVersionInfo().equals(ver))
+                {
+                    ShowDialog(dlink,ver);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
