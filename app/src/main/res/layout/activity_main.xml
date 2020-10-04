@@ -78,10 +78,10 @@
                 android:background="@drawable/custom_buttons"
                 android:fontFamily="@font/roboto_medium_numbers"
                 android:gravity="center"
-                android:text="WIPLAY Unlimited Entertainment"
+                android:text="@string/bottom_banner_text"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -94,6 +94,7 @@
         android:layout_height="match_parent"
         app:menu="@menu/category_menu"
         android:layout_gravity="start"
+        app:headerLayout="@layout/nav_menu_header"
         app:itemTextColor="@android:color/white"
         android:background="@color/colorPrimary"/>
     </androidx.drawerlayout.widget.DrawerLayout>
