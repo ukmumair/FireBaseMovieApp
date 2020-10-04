@@ -40,15 +40,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ToolBar" />
 
-<!--            <com.google.android.gms.ads.AdView-->
+<!--            <com.mopub.mobileads.MoPubView-->
 <!--                android:id="@+id/adView"-->
 <!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentBottom="true"-->
-<!--                android:layout_centerHorizontal="true"-->
+<!--                app:moPubAdSize="match_view"-->
+<!--                android:layout_height="60dp"-->
 <!--                android:layout_marginTop="8dp"-->
-<!--                ads:adSize="BANNER"-->
-<!--                ads:adUnitId="ca-app-pub-5059492081286261/7865039855"-->
 <!--                ads:layout_constraintEnd_toEndOf="parent"-->
 <!--                ads:layout_constraintStart_toStartOf="parent"-->
 <!--                ads:layout_constraintTop_toBottomOf="@id/ToolBar"/>-->

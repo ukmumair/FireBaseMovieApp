@@ -52,15 +52,13 @@ public class MoviesAdapter extends FirebaseRecyclerAdapter<MoviesModel , MoviesA
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (mInterstitialAd.isLoaded()) {
+//                if (mInterstitialAd.isReady()) {
 //                    mInterstitialAd.show();
 //                } else {
-//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setDataAndType(Uri.parse(model.getUrl()), "video/*");
                     context.startActivity(Intent.createChooser(intent, "Complete action using"));
 //                }
-
             }
         });
         holder.imageView.setOnClickListener(new View.OnClickListener() {
