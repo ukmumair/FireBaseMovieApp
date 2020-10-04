@@ -33,6 +33,7 @@ public class SplashScreen extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String version = Objects.requireNonNull(snapshot.child("latest").getValue()).toString();
                 final String dlink = Objects.requireNonNull(snapshot.child("dlink").getValue()).toString();
+                final String changelogs = Objects.requireNonNull(snapshot.child("changelogs").getValue()).toString();
                 if (!getVersionInfo().equals(version))
                 {
                     new Handler().postDelayed(new Runnable(){
@@ -40,6 +41,7 @@ public class SplashScreen extends AppCompatActivity {
                         public void run() {
                             Intent UpdateIntent = new Intent(SplashScreen.this, UDPage.class);
                             UpdateIntent.putExtra("DLINK",dlink);
+                            UpdateIntent.putExtra("CHANGELOGS",changelogs);
                             SplashScreen.this.startActivity(UpdateIntent);
                             SplashScreen.this.finish();
                         }

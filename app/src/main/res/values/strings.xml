@@ -16,4 +16,8 @@
     <string name="bottom_banner_text">WIPLAY Unlimited Entertainment</string>
     <string name="update_available">Update Available</string>
     <string name="wilogo">WILOGO</string>
+    <string name="changelog">Changelog :-</string>
+    <string name="full_changelog_here">Full Changelog here</string>
+    <string name="exit_button_text">Exit</string>
+    <string name="update_button_text">Update</string>
 </resources>
