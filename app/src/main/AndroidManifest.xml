@@ -24,9 +24,10 @@
         <activity
             android:name=".UDPage"
             android:screenOrientation="portrait">
-        </activity> <!-- <meta-data -->
-        <!-- android:name="com.google.android.gms.ads.APPLICATION_ID" -->
-        <!-- android:value="ca-app-pub-5059492081286261~7648567378" /> -->
+        </activity>
+         <meta-data
+         android:name="com.google.android.gms.ads.APPLICATION_ID"
+         android:value="ca-app-pub-5059492081286261~7648567378" />
         <activity
             android:name=".SearchResults"
             android:screenOrientation="portrait">

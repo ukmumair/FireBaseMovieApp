@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
@@ -32,6 +35,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    Intent intent;
     RecyclerView recyclerView;
     ProgressBar progressBar;
     public MoviesAdapter adapter;
@@ -40,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     private InterstitialAd interstitialAd;
     List<MoviesModel> list;
-//    InterstitialAd mInterstitialAd;
     FirebaseDatabase db;
     DatabaseReference moviesRef;
+    private AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,24 +59,13 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         moviesRef = db.getReference("Movies");
         progressBar.setVisibility(View.VISIBLE);
-        setSupportActionBar(toolbar);
-//        AdView adView = new AdView(this);
-//        adView.setAdSize(AdSize.BANNER);
-//        adView.setAdUnitId("ca-app-pub-5059492081286261/7865039855");
-//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-//            @Override
-//            public void onInitializationComplete(InitializationStatus initializationStatus) {
-//            }
-//        });
-//        AdView mAdView = findViewById(R.id.adView);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
-//        MobileAds.initialize(MainActivity.this,
-//                "ca-app-pub-5059492081286261~7648567378");
-//        mInterstitialAd = new InterstitialAd(MainActivity.this);
-//        mInterstitialAd.setAdUnitId("ca-app-pub-5059492081286261/2257489956");
-//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
         AudienceNetworkAds.initialize(this);
+
+        adView = new AdView(this, "799169794203817_799629900824473", AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+
         interstitialAd = new InterstitialAd(this, "799169794203817_799180570869406");
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
@@ -113,19 +106,13 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent;
                 if (item.getTitle()==item.getTitle() && !item.getTitle().equals("Search"))
                 {
-//                    if (mInterstitialAd.isReady()) {
-//                            mInterstitialAd.show();
-//                        }
-//                    else {
                         String category = item.getTitle().toString();
                         intent = new Intent(MainActivity.this,Categories.class);
                         intent.putExtra("CATEGORY",category);
                         intent.putExtra("ORDERBY","movie_type");
-                    //                        }
-                }
+                        }
                 else
                 {
                         intent = new Intent(MainActivity.this, SearchResults.class);
@@ -154,6 +141,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        //Banner
+        if (adView != null) {
+            adView.destroy();
+        }
+        //Interstitial
         if (interstitialAd != null) {
             interstitialAd.destroy();
         }

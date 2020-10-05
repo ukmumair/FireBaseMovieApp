@@ -29,25 +29,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/colorPrimary"/>
 
-<!--    <com.google.android.gms.ads.AdView-->
-<!--        android:id="@+id/adViewCategories"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        ads:adSize="BANNER"-->
-<!--        ads:adUnitId="ca-app-pub-5059492081286261/7865039855"-->
-<!--        ads:layout_constraintEnd_toEndOf="parent"-->
-<!--        ads:layout_constraintStart_toStartOf="parent"-->
-<!--        ads:layout_constraintTop_toBottomOf="@id/toolBar"/>-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recCategory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/banner_container" />
+
+    <LinearLayout
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar" />

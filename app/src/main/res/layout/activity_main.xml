@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/drawerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
@@ -25,8 +24,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:navigationIcon="@drawable/menu_icon"
-                app:title="Home"
-                app:titleTextColor="#fff" />
+                app:titleTextColor="#fff"/>
 
             <ProgressBar
                 android:id="@+id/pbar"
@@ -36,6 +34,18 @@
                 android:indeterminateTint="#5E35B1"
                 android:indeterminateTintMode="src_atop"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ToolBar" />
+
+            <LinearLayout
+                android:id="@+id/banner_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ToolBar" />
@@ -62,7 +72,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ToolBar"
+                app:layout_constraintTop_toBottomOf="@id/banner_container"
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
@@ -81,6 +91,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                app:layout_constraintStart_toStartOf="@id/ToolBar"
+                app:layout_constraintEnd_toEndOf="@id/ToolBar"
+                app:layout_constraintTop_toTopOf="@id/ToolBar"
+                app:layout_constraintBottom_toBottomOf="@id/ToolBar"
+                android:src="@drawable/wi_play_new_toolbar_23_new"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
