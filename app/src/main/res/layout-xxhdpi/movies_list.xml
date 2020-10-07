@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="135dp"
+        android:layout_width="120dp"
         android:layout_height="200dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
@@ -40,4 +40,8 @@
             android:textSize="15sp" />
 
     </androidx.cardview.widget.CardView>
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
