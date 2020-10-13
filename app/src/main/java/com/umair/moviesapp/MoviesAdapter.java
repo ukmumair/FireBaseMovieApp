@@ -20,6 +20,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 public class MoviesAdapter extends FirebaseRecyclerAdapter<MoviesModel , MoviesAdapter.Vholder> {
     private Context context;
@@ -29,6 +30,8 @@ public class MoviesAdapter extends FirebaseRecyclerAdapter<MoviesModel , MoviesA
         super(options);
         this.context = context;
         this.progressBar = progressBar;
+        MobileAds.initialize(context,
+                "ca-app-pub-5059492081286261~7648567378");
         mInterstitialAd = new InterstitialAd(context);
         mInterstitialAd.setAdUnitId("ca-app-pub-5059492081286261/2257489956");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());

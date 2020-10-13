@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -16,14 +15,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.facebook.ads.AudienceNetworkAds;
-import com.facebook.ads.InterstitialAd;
-import com.facebook.ads.InterstitialAdListener;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -42,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    private InterstitialAd interstitialAd;
     List<MoviesModel> list;
     FirebaseDatabase db;
     DatabaseReference moviesRef;
-    private AdView adView;
+    private AdView mAdView;
+    InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,69 +57,54 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         moviesRef = db.getReference("Movies");
         progressBar.setVisibility(View.VISIBLE);
-        AudienceNetworkAds.initialize(this);
+        MobileAds.initialize(this,
+                "ca-app-pub-5059492081286261~7648567378");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-5059492081286261/2257489956");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-        adView = new AdView(this, "799169794203817_799629900824473", AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-
-        interstitialAd = new InterstitialAd(this, "799169794203817_799180570869406");
-        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onInterstitialDisplayed(Ad ad) {
-            }
-
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                interstitialAd.show();
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-            }
-        };
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               drawerLayout.openDrawer(GravityCompat.START);
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 if (item.getTitle()==item.getTitle() && !item.getTitle().equals("Search"))
                 {
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    }
+                    else {
                         String category = item.getTitle().toString();
-                        intent = new Intent(MainActivity.this,Categories.class);
-                        intent.putExtra("CATEGORY",category);
-                        intent.putExtra("ORDERBY","movie_type");
-                        }
+                        intent = new Intent(MainActivity.this, Categories.class);
+                        intent.putExtra("CATEGORY", category);
+                        intent.putExtra("ORDERBY", "movie_type");
+                        startActivity(intent);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    }
+                }
                 else
                 {
-                        intent = new Intent(MainActivity.this, SearchResults.class);
+                    intent = new Intent(MainActivity.this, SearchResults.class);
+                    startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 }
-                startActivity(intent);
-                drawerLayout.closeDrawer(GravityCompat.START);
+
+
+
                 return true;
             }
         });
+
         recyclerView = findViewById(R.id.recView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3,RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -141,14 +124,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        //Banner
-        if (adView != null) {
-            adView.destroy();
-        }
-        //Interstitial
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
-        }
         super.onDestroy();
         adapter.stopListening();
         clearApplicationData();

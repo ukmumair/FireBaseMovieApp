@@ -13,14 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.facebook.ads.AudienceNetworkAds;
-import com.facebook.ads.InterstitialAd;
-import com.facebook.ads.InterstitialAdListener;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +41,7 @@ public class SearchResults extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference moviesRef;
     EditText editText;
-    private AdView adView;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,42 +58,15 @@ public class SearchResults extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         searchAdapter = new SearchAdapter(this,list);
         recyclerView.setAdapter(searchAdapter);
-        AudienceNetworkAds.initialize(this);
-        adView = new AdView(this, "799169794203817_799629900824473", AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        interstitialAd = new InterstitialAd(this, "799169794203817_799180570869406");
-        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onInterstitialDisplayed(Ad ad) {
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
+        });
 
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                interstitialAd.show();
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-            }
-        };
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
